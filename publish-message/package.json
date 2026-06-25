@@ -1,0 +1,6 @@
+{
+  "name": "publish-message",
+  "version": "1.0.0",
+  "description": "Send review_result.md to Discord, Telegram, or GitLab MR",
+  "license": "MIT"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "code-review",
+  "version": "1.0.0",
+  "description": "Multi-agent PR review squad for pi",
+  "license": "MIT"
+}
