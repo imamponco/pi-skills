@@ -396,7 +396,7 @@ if ! command -v git >/dev/null 2>&1; then
   exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}" 2>/dev/null)" 2>/dev/null && pwd)" || SCRIPT_DIR="$(pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}" 2>/dev/null)" 2>/dev/null && pwd)" || SCRIPT_DIR="$(pwd 2>/dev/null)"
 
 if [ "$TARGET" = "all" ]; then
   NAME="pi-skills"
