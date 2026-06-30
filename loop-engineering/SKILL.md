@@ -30,6 +30,7 @@ You should:
 - persist loop state outside the conversation
 - commit and push changes in small, reviewable units
 - create a merge request when the branch is ready, or keep pushing commits to the existing MR branch if one already exists
+- follow the repository's branch naming, commit naming, and MR title conventions consistently
 
 ## Inputs
 This skill can accept:
@@ -39,6 +40,7 @@ This skill can accept:
 - a recurring objective
 - a repo/worktree context
 - the current git branch and MR status
+- the target branch prefix or MR naming convention
 
 ## Output format
 Use Markdown with the following sections:
@@ -64,6 +66,32 @@ Explain what should be persisted and where.
 Describe how the loop should commit, push, and handle merge requests.
 Include the rule for an existing MR: push new commits to the same MR branch instead of creating a duplicate MR.
 
+### Branch naming
+Use these branch prefixes when creating or selecting work branches:
+- `feat/*` for feature work
+- `fix/*` for bug fixes
+- `rc/*` for release candidates
+
+### MR title naming
+Use these MR title prefixes:
+- `Feature:` for `feat/*`
+- `Fix:` for `fix/*`
+- `Release Candidate:` for `rc/*`
+
+### Commit naming
+Use Angular-style conventional commits for all commits, for example:
+- `feat(loop-engineering): add MR title rules`
+- `fix(publish-message): handle empty file input`
+- `chore(docs): update loop engineering guide`
+
+### MR description
+Always add a clear MR description. Include:
+- summary of the change
+- why the change is needed
+- verification performed
+- related branch name
+- any follow-up risk or caveat
+
 ## 7. Stop Conditions
 List the conditions that should halt the loop.
 
@@ -83,6 +111,8 @@ If the state is not durable, note the risk.
 If the evaluator can only grade its own output, call that out as weak.
 If git delivery is missing, call that out as a shipping gap.
 If the plan creates duplicate merge requests instead of updating the existing branch, flag it as wasteful.
+If the branch prefix, MR title, or commit style is missing, call it out as inconsistent delivery.
+If the MR description is missing useful context, flag it as incomplete.
 
 ## Tone
 - strategic
