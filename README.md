@@ -2,6 +2,17 @@
 
 A collection of skills for [pi-coding-agent](https://pi.dev).
 
+## Overview
+
+`pi-skills` is organized into reusable skill families:
+
+- **Review and publishing**: `code-review`, `publish-message`
+- **Planning**: `prd`, `task-detail`
+- **Execution loop**: `task-breakdown`, `task-execute`, `task-verify`, `task-loop`
+- **Loop engineering**: `loop-engineering`, `morning-triage`, `loop-state`, `loop-judge`, `loop-harness`, `loop-scheduler`
+
+The goal is to keep each skill small, stable, and composable so you can build workflows without turning them into one large prompt.
+
 ## Skills
 
 | Skill | `/skill:` | Description |
@@ -21,79 +32,32 @@ A collection of skills for [pi-coding-agent](https://pi.dev).
 | [loop-harness](loop-harness/SKILL.md) | `loop-harness` | Defines loop tools, limits, checkpoints, and stop conditions. |
 | [loop-scheduler](loop-scheduler/SKILL.md) | `loop-scheduler` | Time-boxes and reschedules recurring loop runs. |
 
-## How to use the added skills
+## Quick links for the added skills
+
+For a full usage guide, see [`docs/skills.md`](docs/skills.md).
 
 ### Planning and task execution
 
-- **`prd`** — turn a vague idea into a structured PRD.
-  - Use: `/skill:prd`
-  - Good for: clarifying goals, constraints, assumptions, and risks before implementation.
-
-- **`task-detail`** — convert an approved PRD into execution-ready tasks.
-  - Use: `/skill:task-detail`
-  - Good for: estimates, milestones, acceptance criteria, and sequencing.
-
-- **`task-breakdown`** — split a plan into atomic execution tasks.
-  - Use: `/skill:task-breakdown`
-  - Good for: identifying the next smallest safe slice of work.
-
-- **`task-execute`** — implement one atomic task with minimal safe change.
-  - Use: `/skill:task-execute`
-  - Good for: small code changes, scoped edits, and one-task-at-a-time execution.
-
-- **`task-verify`** — check implementation against the plan and acceptance criteria.
-  - Use: `/skill:task-verify`
-  - Good for: confirming the work actually satisfies the task, not just that it compiles.
-
-- **`task-loop`** — orchestrate the break → execute → verify cycle.
-  - Use: `/skill:task-loop`
-  - Good for: repeated implementation loops when you want a structured iteration path.
+- `prd` — `/skill:prd`
+- `task-detail` — `/skill:task-detail`
+- `task-breakdown` — `/skill:task-breakdown`
+- `task-execute` — `/skill:task-execute`
+- `task-verify` — `/skill:task-verify`
+- `task-loop` — `/skill:task-loop`
 
 ### Loop engineering workflow
 
-- **`loop-engineering`** — coordinate the full loop stack and keep human checkpoints visible.
-  - Use: `/skill:loop-engineering`
-  - Good for: designing the overall operating model for a recurring engineering loop.
+- `loop-engineering` — `/skill:loop-engineering`
+- `morning-triage` — `/skill:morning-triage`
+- `loop-state` — `/skill:loop-state`
+- `loop-judge` — `/skill:loop-judge`
+- `loop-harness` — `/skill:loop-harness`
+- `loop-scheduler` — `/skill:loop-scheduler`
 
-- **`morning-triage`** — inspect fresh inputs, triage them, and write initial state.
-  - Use: `/skill:morning-triage`
-  - Good for: daily or timer-based discovery from CI, issues, inboxes, commits, or logs.
+### Recommended flows
 
-- **`loop-state`** — persist durable loop memory across cycles.
-  - Use: `/skill:loop-state`
-  - Good for: saving what happened, what remains open, and what should happen next.
-
-- **`loop-judge`** — independently judge whether work is worth acting on.
-  - Use: `/skill:loop-judge`
-  - Good for: evaluator-style review, rejection of weak outputs, and reducing self-confirmation bias.
-
-- **`loop-harness`** — define allowed tools, budgets, checkpoints, and stop conditions.
-  - Use: `/skill:loop-harness`
-  - Good for: making the loop safe to run unattended without removing human control.
-
-- **`loop-scheduler`** — set cadence, expiry, and rescheduling rules.
-  - Use: `/skill:loop-scheduler`
-  - Good for: recurring runs, time-boxing, and preventing indefinite always-on loops.
-
-### Recommended loop flow
-
-A practical sequence is:
-
-1. `/skill:morning-triage`
-2. `/skill:loop-state`
-3. `/skill:loop-judge`
-4. `/skill:loop-harness`
-5. `/skill:loop-scheduler`
-6. `/skill:loop-engineering`
-
-Use the task workflow when the loop produces implementation work:
-
-1. `/skill:prd`
-2. `/skill:task-detail`
-3. `/skill:task-breakdown`
-4. `/skill:task-execute`
-5. `/skill:task-verify`
-6. `/skill:task-loop`
+- Task flow: `/skill:prd` → `/skill:task-detail` → `/skill:task-breakdown` → `/skill:task-execute` → `/skill:task-verify` → `/skill:task-loop`
+- Loop flow: `/skill:morning-triage` → `/skill:loop-state` → `/skill:loop-judge` → `/skill:loop-harness` → `/skill:loop-scheduler` → `/skill:loop-engineering`
 
 ## Requirements
 
@@ -134,7 +98,17 @@ cp -R ~/.pi/agent/npm/node_modules/pi-multiagent/skills/pi-multiagent ~/.pi/agen
 
 Then restart pi again.
 
-## Quick Install
+## Quickstart
+
+### 1) Install the baseline dependency
+
+`code-review` needs `pi-multiagent`.
+
+```bash
+pi install npm:pi-multiagent
+```
+
+### 2) Install the skills
 
 Recommended order:
 
@@ -144,6 +118,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/imamponco/pi-skills/main
 ```
 
 Then restart pi.
+
+### 3) Install a single skill or everything
 
 Install only `code-review`:
 
@@ -168,6 +144,25 @@ Project-level install:
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/imamponco/pi-skills/main/install.sh)" -- all --project --force
 ```
+
+### 4) Verify the installed skills
+
+In pi, check the skills you expect to use:
+
+```text
+/skill:code-review
+/skill:publish-message
+/skill:prd
+/skill:loop-engineering
+/skill:morning-triage
+```
+
+### 5) Start using the workflows
+
+- Review and publish: `/skill:code-review main` → `/skill:publish-message`
+- Plan work: `/skill:prd` → `/skill:task-detail`
+- Execute work: `/skill:task-breakdown` → `/skill:task-execute` → `/skill:task-verify`
+- Run a loop system: `/skill:morning-triage` → `/skill:loop-state` → `/skill:loop-judge` → `/skill:loop-harness` → `/skill:loop-scheduler` → `/skill:loop-engineering`
 
 ## Non-interactive setup
 
