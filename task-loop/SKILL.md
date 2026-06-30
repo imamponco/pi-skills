@@ -1,6 +1,6 @@
 ---
 name: task-loop
-description: Orchestrate the iterative loop of breaking down work, executing one atomic task, verifying it, and deciding the next iteration.
+description: "Orchestrate the iterative loop of breaking down work, executing one atomic task, verifying it, and deciding the next iteration."
 ---
 
 # Task Loop Skill

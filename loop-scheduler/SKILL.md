@@ -1,6 +1,6 @@
 ---
 name: loop-scheduler
-description: Schedule, reschedule, and time-box recurring loop runs with clear intervals and expiry behavior.
+description: "Schedule, reschedule, and time-box recurring loop runs with clear intervals and expiry behavior."
 ---
 
 # Loop Scheduler Skill

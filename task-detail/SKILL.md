@@ -1,6 +1,6 @@
 ---
 name: task-detail
-description: Convert an approved PRD into implementation-ready engineering tasks, estimates, dependencies, and an ideal timeline.
+description: "Convert an approved PRD into implementation-ready engineering tasks, estimates, dependencies, and an ideal timeline."
 ---
 
 # Task Detail Skill

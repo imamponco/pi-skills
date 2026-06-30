@@ -1,6 +1,6 @@
 ---
 name: loop-state
-description: Persist loop state, carry forward decisions, and maintain durable memory across cycles.
+description: "Persist loop state, carry forward decisions, and maintain durable memory across cycles."
 ---
 
 # Loop State Skill

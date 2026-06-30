@@ -1,6 +1,6 @@
 ---
 name: morning-triage
-description: Read a fresh set of inputs on a timer, triage the items, and write the initial state file for the loop.
+description: "Read a fresh set of inputs on a timer, triage the items, and write the initial state file for the loop."
 ---
 
 # Morning Triage Skill

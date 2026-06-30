@@ -1,6 +1,6 @@
 ---
 name: loop-engineering
-description: Coordinate the loop-engineering stack: discovery, state, harness, evaluator, scheduling, and human checkpoints.
+description: "Coordinate the loop-engineering stack: discovery, state, harness, evaluator, scheduling, and human checkpoints."
 ---
 
 # Loop Engineering Skill

@@ -1,6 +1,6 @@
 ---
 name: loop-judge
-description: Independently judge whether loop findings, candidate items, or generated outputs are worth acting on.
+description: "Independently judge whether loop findings, candidate items, or generated outputs are worth acting on."
 ---
 
 # Loop Judge Skill

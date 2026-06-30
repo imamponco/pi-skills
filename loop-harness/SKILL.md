@@ -1,6 +1,6 @@
 ---
 name: loop-harness
-description: Define and maintain the loop's allowed tools, actions, stop conditions, budget caps, and checkpoint structure.
+description: "Define and maintain the loop's allowed tools, actions, stop conditions, budget caps, and checkpoint structure."
 ---
 
 # Loop Harness Skill

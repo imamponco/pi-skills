@@ -1,6 +1,6 @@
 ---
 name: task-verify
-description: Verify that a completed task or implementation matches the task-detail, acceptance criteria, and expected behavior.
+description: "Verify that a completed task or implementation matches the task-detail, acceptance criteria, and expected behavior."
 ---
 
 # Task Verify Skill

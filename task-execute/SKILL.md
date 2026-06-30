@@ -1,6 +1,6 @@
 ---
 name: task-execute
-description: Execute one atomic task from a task-detail or task-breakdown by making the smallest safe implementation change and documenting the result.
+description: "Execute one atomic task from a task-detail or task-breakdown by making the smallest safe implementation change and documenting the result."
 ---
 
 # Task Execute Skill

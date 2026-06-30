@@ -1,6 +1,6 @@
 ---
 name: task-breakdown
-description: Turn an approved PRD or task-detail into atomic execution chunks, prioritized next steps, dependencies, and handoff-ready task cards.
+description: "Turn an approved PRD or task-detail into atomic execution chunks, prioritized next steps, dependencies, and handoff-ready task cards."
 ---
 
 # Task Breakdown Skill

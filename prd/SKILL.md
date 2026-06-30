@@ -1,6 +1,6 @@
 ---
 name: prd
-description: Turn a vague idea, business request, or feature prompt into a structured, challengeable Product Requirement Document (PRD).
+description: "Turn a vague idea, business request, or feature prompt into a structured, challengeable Product Requirement Document (PRD)."
 ---
 
 # PRD Skill
