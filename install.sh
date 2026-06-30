@@ -12,6 +12,88 @@ TELEGRAM_CHAT_ID=""
 GITLAB_TOKEN=""
 GITLAB_API_URL=""
 REPO_URL="${REPO_URL:-https://github.com/imamponco/pi-skills.git}"
+OUTPUT_FORMAT="${OUTPUT_FORMAT:-json}"
+RESULT_INSTALLED=()
+RESULT_UPDATED=()
+RESULT_WARNINGS=()
+RESULT_PUBLISH_SETUP="skipped"
+EMIT_JSON_RESULT="true"
+
+json_string() {
+  python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$1"
+}
+
+json_array() {
+  local out="["
+  local first="true"
+  local item
+  if [ "$#" -eq 0 ]; then
+    printf '[]'
+    return 0
+  fi
+  for item in "$@"; do
+    if [ "$first" = "false" ]; then
+      out+="," 
+    fi
+    first="false"
+    out+="$(json_string "$item")"
+  done
+  out+="]"
+  printf '%s' "$out"
+}
+
+record_installed() {
+  RESULT_INSTALLED+=("$1")
+}
+
+record_updated() {
+  RESULT_UPDATED+=("$1")
+}
+
+record_warning() {
+  RESULT_WARNINGS+=("$1")
+}
+
+emit_json_result() {
+  [ "$OUTPUT_FORMAT" = "json" ] || return 0
+  local installed_json updated_json warnings_json
+  installed_json='[]'
+  updated_json='[]'
+  warnings_json='[]'
+  if [ "${#RESULT_INSTALLED[@]}" -gt 0 ]; then installed_json="$(json_array "${RESULT_INSTALLED[@]}")"; fi
+  if [ "${#RESULT_UPDATED[@]}" -gt 0 ]; then updated_json="$(json_array "${RESULT_UPDATED[@]}")"; fi
+  if [ "${#RESULT_WARNINGS[@]}" -gt 0 ]; then warnings_json="$(json_array "${RESULT_WARNINGS[@]}")"; fi
+  python3 - "$TARGET" "$MODE" "$installed_json" "$updated_json" "$warnings_json" "$RESULT_PUBLISH_SETUP" <<'PY'
+import json, sys
+
+target, mode, installed, updated, warnings, publish_setup = sys.argv[1:7]
+result = {
+    "ok": True,
+    "target": target,
+    "mode": mode,
+    "output": "json",
+    "installed": json.loads(installed),
+    "updated": json.loads(updated),
+    "warnings": json.loads(warnings),
+    "publish_setup": publish_setup,
+    "restart_required": True,
+}
+print(json.dumps(result, ensure_ascii=False))
+PY
+}
+
+finish_success() {
+  emit_json_result
+  exit 0
+}
+
+echo() {
+  if [ "$OUTPUT_FORMAT" = "json" ]; then
+    command echo "$@" >&2
+  else
+    command echo "$@"
+  fi
+}
 
 usage() {
   cat <<'EOF'
@@ -25,6 +107,7 @@ Targets:
 Options:
   --project                Install to current project .pi/skills
   --force                  Replace existing install and prompt setup again
+  --output <json|md>       Output format (default: json)
   --repo <url>             Override git repo URL
   --setup                  Interactive menu (multiple platforms allowed)
   --setup-discord          Configure Discord delivery
@@ -39,8 +122,8 @@ Options:
   -h, --help               Show help
 
 Examples:
-  ./install.sh all --force
-  ./install.sh publish-message --setup
+  ./install.sh all --force --output json
+  ./install.sh publish-message --setup --output md
   ./install.sh publish-message --setup-discord
   ./install.sh publish-message --discord-webhook-url https://discord.com/api/webhooks/xxx/yyy
   ./install.sh publish-message --setup-gitlab
@@ -124,6 +207,7 @@ GITLAB_API_URL="$GITLAB_API_URL"
 EOF
 
   chmod 600 "$env_file"
+  RESULT_PUBLISH_SETUP="configured:$ok_platforms"
   echo "Configured delivery ($ok_platforms) -> $env_file"
 }
 
@@ -151,6 +235,7 @@ GITLAB_API_URL="$GITLAB_API_URL"
 EOF
 
   chmod 600 "$env_file"
+  RESULT_PUBLISH_SETUP="configured:$platform"
   echo "Configured $platform delivery -> $env_file"
 }
 
@@ -279,6 +364,7 @@ install_all_skills() {
       if [ "$FORCE" = "true" ]; then
         rm -rf "$dest"
         cp -R "$skill_path" "$dest"
+        record_updated "$skill_name"
         echo "Updated existing skill -> /skill:$skill_name"
       else
         local action mode resolved
@@ -288,15 +374,18 @@ install_all_skills() {
         if [ "$mode" = "update" ]; then
           rm -rf "$dest"
           cp -R "$skill_path" "$dest"
+          record_updated "$skill_name"
           echo "Updated existing skill -> /skill:$skill_name"
         else
           cp -R "$skill_path" "$dest_base/$resolved"
           rewrite_skill_name "$dest_base/$resolved" "$resolved"
+          record_installed "$resolved"
           echo "Conflict found: installed new skill as /skill:$resolved"
         fi
       fi
     else
       cp -R "$skill_path" "$dest"
+      record_installed "$skill_name"
       echo "Installed /skill:$skill_name -> $dest"
     fi
 
@@ -381,7 +470,8 @@ while [ $# -gt 0 ]; do
     --gitlab-token) GITLAB_TOKEN="${2:?missing GitLab token}"; [[ ",$SETUP_PLATFORMS," != *",gitlab,"* ]] && SETUP_PLATFORMS="${SETUP_PLATFORMS:+$SETUP_PLATFORMS,}gitlab"; shift 2 ;; 
 
     --gitlab-api-url) GITLAB_API_URL="${2:?missing GitLab API URL}"; shift 2 ;;
-    -h|--help) usage; exit 0 ;;
+    --output) OUTPUT_FORMAT="${2:?missing output format}"; shift 2 ;;
+    -h|--help) OUTPUT_FORMAT="md"; EMIT_JSON_RESULT="false"; usage; exit 0 ;;
     *) TARGET="$1"; shift ;;
   esac
 done
@@ -390,6 +480,8 @@ if [ "$SETUP_PLATFORM" = "prompt" ]; then
   SETUP_PLATFORM=""
   FORCE="true"
 fi
+
+trap 'status=$?; if [ "$status" -eq 0 ] && [ "$EMIT_JSON_RESULT" = "true" ]; then emit_json_result; fi' EXIT
 
 if ! command -v git >/dev/null 2>&1; then
   echo "Error: git is required" >&2
