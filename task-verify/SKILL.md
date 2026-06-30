@@ -34,7 +34,7 @@ At minimum, check:
 - edge cases and error paths
 - test coverage or validation evidence
 - alignment with the PRD/task-detail
-- project-local quality checks that exist in the repo (for example `lint`, `test`, `check`, `verify`, `security`, or `audit` scripts)
+- project-local quality checks that exist in the repo
 
 ## Output format
 Use Markdown with the following sections:
@@ -47,10 +47,12 @@ State what was verified.
 ## 2. Criteria Check
 List the acceptance criteria or expected behaviors with pass/fail status.
 Include any project-local lint, test, security, or quality commands that were available and whether they passed.
+If multiple commands exist, prefer reporting the strongest signal first (security/audit, then lint, then test, then verify/check).
 
 ## 3. Evidence
 Summarize the evidence used for verification.
 If a project-local linter or security check exists, name the exact command that was run.
+If no local quality command exists, say what project files were checked to confirm that.
 
 ## 4. Issues Found
 List defects, gaps, or risks.
@@ -71,6 +73,7 @@ State what should happen next.
 - Do not confuse “looks right” with “is verified.”
 - If tests are missing, say that plainly.
 - Prefer project-local lint, test, and security commands over generic assumptions when they exist.
+- Inspect common project files for local commands before concluding none exist (for example `package.json`, `Makefile`, `justfile`, `pyproject.toml`, `go.mod`, `Cargo.toml`).
 - If the repo has no local quality command, say what was searched and what was not found.
 
 ## Challenge rules

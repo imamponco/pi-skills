@@ -46,7 +46,8 @@ If the task is larger than that, recommend breaking it down first.
 4. Execute the change.
 5. Validate the result.
 6. Prefer project-local quality commands where the repo provides them, such as lint, test, verify, audit, or security checks.
-7. Summarize what changed, what was verified, and any follow-up needed.
+7. If the repo has no obvious local quality command, inspect common project files before falling back to manual checks.
+8. Summarize what changed, what was verified, and any follow-up needed.
 
 ## Output format
 Use Markdown with the following sections:
@@ -80,6 +81,7 @@ Any known caveats or next steps.
 - Add tests when they materially reduce risk.
 - Do not silently broaden the task.
 - If the repo has a local linter or security command, use it before claiming the task is done.
+- If no local command exists, inspect common project files before choosing a manual fallback.
 - If the task cannot be completed safely, stop and explain why.
 
 ## Challenge rules

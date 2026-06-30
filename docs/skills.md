@@ -55,6 +55,7 @@ Best for:
 - scoped edits
 - small code changes
 - one-task-at-a-time execution
+- preferring repo-local lint, test, or security commands when available
 
 ### `task-verify`
 Check implementation against the plan and acceptance criteria.
@@ -67,6 +68,7 @@ Use:
 Best for:
 - confirming the work actually satisfies the task
 - catching “it compiles, therefore it’s done” mistakes
+- checking for local quality commands before manual verification
 
 ### `task-loop`
 Orchestrate the break → execute → verify cycle.
@@ -79,6 +81,7 @@ Use:
 Best for:
 - repeated implementation loops
 - keeping the cycle explicit and bounded
+- surfacing project-local quality checks before continuing
 
 ## Loop engineering workflow
 
@@ -92,6 +95,7 @@ Use:
 
 Best for:
 - designing the overall operating model for a recurring engineering loop
+- setting quality and security expectations for the loop
 
 ### `morning-triage`
 Inspect fresh inputs, triage them, and write initial state.

@@ -22,6 +22,7 @@ Given a task-detail or PRD, this skill should:
 - trigger or emulate a focused execution pass
 - verify the result against the requirement
 - prefer project-local lint, test, verify, or security commands when they exist
+- inspect common project files for local commands when none are obvious
 - continue only if the next iteration is justified
 
 ## Required working style
@@ -41,6 +42,7 @@ Stop and surface a decision when:
 - the remaining work needs product-level approval
 - the plan is complete
 - the repo lacks a required quality command and a manual fallback would be unsafe
+- a local quality or security check is available but fails
 
 ## Output format
 Use Markdown with the following sections:
@@ -56,6 +58,7 @@ The single best task to execute next.
 ## 3. Execution Cycle
 Describe the current cycle: execute -> verify -> adjust.
 Mention which local quality commands were used or why none were available.
+If none were obvious, note which project files were checked for discovery.
 
 ## 4. Verification Result
 State whether the cycle passed, partially passed, or failed.
@@ -74,6 +77,7 @@ Call out whether a local lint or security check changed the decision.
 ## 7. Next Action
 The exact next step to run in the loop.
 If a repo-local security or lint command exists, prefer that as the next action before broader execution.
+If none are obvious, state the discovery check before the manual fallback.
 
 ## Quality rules
 - Keep the loop small and bounded.

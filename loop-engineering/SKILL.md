@@ -32,6 +32,7 @@ You should:
 - create a merge request when the branch is ready, or keep pushing commits to the existing MR branch if one already exists
 - follow the repository's branch naming, commit naming, and MR title conventions consistently
 - run the repo's local linter, test, verify, or security commands when they exist before shipping
+- inspect common project files first so you do not miss a local quality command
 
 ## Inputs
 This skill can accept:
@@ -60,6 +61,7 @@ List the small skills that should be used in order.
 ## 4. Human Checkpoints
 State where the human must inspect, approve, or say no.
 Call out any point where a local quality or security check should be reviewed before continuing.
+If no local command is obvious, call out the discovery step used to check common project files.
 
 ## 5. State Strategy
 Explain what should be persisted and where.
@@ -68,6 +70,7 @@ Explain what should be persisted and where.
 Describe how the loop should commit, push, and handle merge requests.
 Include the rule for an existing MR: push new commits to the same MR branch instead of creating a duplicate MR.
 Include the rule that local lint, verify, and security checks should run before pushing if available.
+Include a discovery step for common project files before falling back to manual checks.
 
 ### Branch naming
 Use these branch prefixes when creating or selecting work branches:
@@ -98,6 +101,7 @@ Always add a clear MR description. Include:
 ## 7. Stop Conditions
 List the conditions that should halt the loop.
 Treat failing local quality or security checks as a hard stop unless there is an explicit override.
+Treat the absence of obvious local commands as a reason to inspect common project files before giving up.
 
 ## 8. Next Cycle
 State the exact next step for the next iteration.
@@ -118,6 +122,7 @@ If the plan creates duplicate merge requests instead of updating the existing br
 If the branch prefix, MR title, or commit style is missing, call it out as inconsistent delivery.
 If the MR description is missing useful context, flag it as incomplete.
 If local lint or security checks are skipped without a good reason, flag that as avoidable risk.
+If discovery of project-local commands was incomplete, flag that as weak verification.
 
 ## Tone
 - strategic
