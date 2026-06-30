@@ -45,7 +45,8 @@ If the task is larger than that, recommend breaking it down first.
 3. Determine whether the task is safe to implement as-is.
 4. Execute the change.
 5. Validate the result.
-6. Summarize what changed, what was verified, and any follow-up needed.
+6. Prefer project-local quality commands where the repo provides them, such as lint, test, verify, audit, or security checks.
+7. Summarize what changed, what was verified, and any follow-up needed.
 
 ## Output format
 Use Markdown with the following sections:
@@ -78,6 +79,7 @@ Any known caveats or next steps.
 - Prefer the safest implementation path.
 - Add tests when they materially reduce risk.
 - Do not silently broaden the task.
+- If the repo has a local linter or security command, use it before claiming the task is done.
 - If the task cannot be completed safely, stop and explain why.
 
 ## Challenge rules

@@ -13,7 +13,7 @@ This directory breaks the repo into one folder per skill family. The folder name
 | `docs/task-execute` | `task-execute` | Execute one atomic task |
 | `docs/task-verify` | `task-verify` | Verify completed work |
 | `docs/task-loop` | `task-loop` | Orchestrate break-execute-verify cycles |
-| `docs/loop-engineering` | `loop-engineering` | Coordinate the full loop stack, including git delivery, MR handling, and naming conventions |
+| `docs/loop-engineering` | `loop-engineering` | Coordinate the full loop stack, including git delivery, MR handling, naming conventions, and quality checks |
 | `docs/morning-triage` | `morning-triage` | Triage fresh inputs into state |
 | `docs/loop-state` | `loop-state` | Persist loop memory |
 | `docs/loop-judge` | `loop-judge` | Independently evaluate work |

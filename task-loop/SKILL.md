@@ -21,6 +21,7 @@ Given a task-detail or PRD, this skill should:
 - make sure the task is small enough to execute safely
 - trigger or emulate a focused execution pass
 - verify the result against the requirement
+- prefer project-local lint, test, verify, or security commands when they exist
 - continue only if the next iteration is justified
 
 ## Required working style
@@ -39,6 +40,7 @@ Stop and surface a decision when:
 - the implementation reveals a requirement gap
 - the remaining work needs product-level approval
 - the plan is complete
+- the repo lacks a required quality command and a manual fallback would be unsafe
 
 ## Output format
 Use Markdown with the following sections:
@@ -53,6 +55,7 @@ The single best task to execute next.
 
 ## 3. Execution Cycle
 Describe the current cycle: execute -> verify -> adjust.
+Mention which local quality commands were used or why none were available.
 
 ## 4. Verification Result
 State whether the cycle passed, partially passed, or failed.
@@ -66,9 +69,11 @@ Choose one:
 
 ## 6. Why This Decision
 Short justification focused on risk and progress.
+Call out whether a local lint or security check changed the decision.
 
 ## 7. Next Action
 The exact next step to run in the loop.
+If a repo-local security or lint command exists, prefer that as the next action before broader execution.
 
 ## Quality rules
 - Keep the loop small and bounded.

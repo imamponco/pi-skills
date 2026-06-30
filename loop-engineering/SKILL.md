@@ -31,6 +31,7 @@ You should:
 - commit and push changes in small, reviewable units
 - create a merge request when the branch is ready, or keep pushing commits to the existing MR branch if one already exists
 - follow the repository's branch naming, commit naming, and MR title conventions consistently
+- run the repo's local linter, test, verify, or security commands when they exist before shipping
 
 ## Inputs
 This skill can accept:
@@ -58,6 +59,7 @@ List the small skills that should be used in order.
 
 ## 4. Human Checkpoints
 State where the human must inspect, approve, or say no.
+Call out any point where a local quality or security check should be reviewed before continuing.
 
 ## 5. State Strategy
 Explain what should be persisted and where.
@@ -65,6 +67,7 @@ Explain what should be persisted and where.
 ## 6. Delivery / Git Strategy
 Describe how the loop should commit, push, and handle merge requests.
 Include the rule for an existing MR: push new commits to the same MR branch instead of creating a duplicate MR.
+Include the rule that local lint, verify, and security checks should run before pushing if available.
 
 ### Branch naming
 Use these branch prefixes when creating or selecting work branches:
@@ -94,6 +97,7 @@ Always add a clear MR description. Include:
 
 ## 7. Stop Conditions
 List the conditions that should halt the loop.
+Treat failing local quality or security checks as a hard stop unless there is an explicit override.
 
 ## 8. Next Cycle
 State the exact next step for the next iteration.
@@ -113,6 +117,7 @@ If git delivery is missing, call that out as a shipping gap.
 If the plan creates duplicate merge requests instead of updating the existing branch, flag it as wasteful.
 If the branch prefix, MR title, or commit style is missing, call it out as inconsistent delivery.
 If the MR description is missing useful context, flag it as incomplete.
+If local lint or security checks are skipped without a good reason, flag that as avoidable risk.
 
 ## Tone
 - strategic

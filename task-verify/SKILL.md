@@ -34,6 +34,7 @@ At minimum, check:
 - edge cases and error paths
 - test coverage or validation evidence
 - alignment with the PRD/task-detail
+- project-local quality checks that exist in the repo (for example `lint`, `test`, `check`, `verify`, `security`, or `audit` scripts)
 
 ## Output format
 Use Markdown with the following sections:
@@ -45,9 +46,11 @@ State what was verified.
 
 ## 2. Criteria Check
 List the acceptance criteria or expected behaviors with pass/fail status.
+Include any project-local lint, test, security, or quality commands that were available and whether they passed.
 
 ## 3. Evidence
 Summarize the evidence used for verification.
+If a project-local linter or security check exists, name the exact command that was run.
 
 ## 4. Issues Found
 List defects, gaps, or risks.
@@ -67,6 +70,8 @@ State what should happen next.
 - If evidence is insufficient, say so.
 - Do not confuse “looks right” with “is verified.”
 - If tests are missing, say that plainly.
+- Prefer project-local lint, test, and security commands over generic assumptions when they exist.
+- If the repo has no local quality command, say what was searched and what was not found.
 
 ## Challenge rules
 If the implementation deviates from the task, call it out.
