@@ -8,6 +8,8 @@ A collection of skills for [pi-coding-agent](https://pi.dev).
 |-------|-----------|-------------|
 | [code-review](code-review/SKILL.md) | `code-review` | Multi-agent PR review squad. Generates `review_result.md`. |
 | [publish-message](publish-message/SKILL.md) | `publish-message` | Sends any Markdown/text file to Discord, Telegram, or GitLab MR. Defaults to `review_result.md`. |
+| [prd](prd/SKILL.md) | `prd` | Turns vague ideas into a structured, challengeable PRD. |
+| [task-detail](task-detail/SKILL.md) | `task-detail` | Converts an approved PRD into implementation-ready tasks, estimates, and timeline. |
 
 ## Requirements
 
