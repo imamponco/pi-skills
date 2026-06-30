@@ -10,6 +10,16 @@ A collection of skills for [pi-coding-agent](https://pi.dev).
 | [publish-message](publish-message/SKILL.md) | `publish-message` | Sends any Markdown/text file to Discord, Telegram, or GitLab MR. Defaults to `review_result.md`. |
 | [prd](prd/SKILL.md) | `prd` | Turns vague ideas into a structured, challengeable PRD. |
 | [task-detail](task-detail/SKILL.md) | `task-detail` | Converts an approved PRD into implementation-ready tasks, estimates, and timeline. |
+| [task-breakdown](task-breakdown/SKILL.md) | `task-breakdown` | Breaks plans into atomic execution tasks and identifies the next best slice. |
+| [task-execute](task-execute/SKILL.md) | `task-execute` | Executes one atomic task with minimal safe changes. |
+| [task-verify](task-verify/SKILL.md) | `task-verify` | Verifies implementation against task-detail and acceptance criteria. |
+| [task-loop](task-loop/SKILL.md) | `task-loop` | Orchestrates the iterative break-execute-verify loop. |
+| [loop-engineering](loop-engineering/SKILL.md) | `loop-engineering` | Coordinates the loop-engineering stack and human checkpoints. |
+| [morning-triage](morning-triage/SKILL.md) | `morning-triage` | Reads fresh inputs, triages items, and writes initial loop state. |
+| [loop-state](loop-state/SKILL.md) | `loop-state` | Persists durable loop memory across cycles. |
+| [loop-judge](loop-judge/SKILL.md) | `loop-judge` | Independently judges whether outputs are worth acting on. |
+| [loop-harness](loop-harness/SKILL.md) | `loop-harness` | Defines loop tools, limits, checkpoints, and stop conditions. |
+| [loop-scheduler](loop-scheduler/SKILL.md) | `loop-scheduler` | Time-boxes and reschedules recurring loop runs. |
 
 ## Requirements
 
