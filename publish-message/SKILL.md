@@ -1,6 +1,6 @@
 ---
 name: publish-message
-description: Sends review_result.md to Discord, Telegram, or GitLab MR using publish_message.sh. Use after code-review generates review_result.md.
+description: "Sends review_result.md to Discord, Telegram, or GitLab MR using publish_message.sh. Use after code-review generates review_result.md."
 ---
 
 # Publish Message

@@ -2,6 +2,7 @@
 set -euo pipefail
 
 TARGET="code-review"
+ACTION="install"
 MODE="user"
 FORCE="false"
 SETUP_PLATFORM=""
@@ -97,12 +98,16 @@ echo() {
 
 usage() {
   cat <<'EOF'
-Usage: ./install.sh [skill|all] [options]
+Usage: ./install.sh [install|update] [skill|all] [options]
 
 Targets:
   code-review              Install code-review skill only (default)
   publish-message          Install publish-message skill only
   all                      Install whole repo
+
+Commands:
+  install                  Fresh install behavior
+  update                   Reinstall or upgrade while keeping existing publish-message config
 
 Options:
   --project                Install to current project .pi/skills
@@ -123,6 +128,7 @@ Options:
 
 Examples:
   ./install.sh all --force --output json
+  ./install.sh update all --output json
   ./install.sh publish-message --setup --output md
   ./install.sh publish-message --setup-discord
   ./install.sh publish-message --discord-webhook-url https://discord.com/api/webhooks/xxx/yyy
@@ -412,11 +418,13 @@ choose_publish_setup() {
     return 0
   fi
 
-  if [ ! -t 0 ]; then
+  if [ "$ACTION" = "update" ] && [ -f "$HOME/.publish-message.env" ]; then
+    RESULT_PUBLISH_SETUP="kept-existing"
+    echo "Kept existing publish-message config -> $HOME/.publish-message.env"
     return 0
   fi
 
-  if [ -f "$HOME/.publish-message.env" ] && [ "$FORCE" != "true" ]; then
+  if [ ! -t 0 ]; then
     return 0
   fi
 
@@ -457,6 +465,10 @@ choose_publish_setup() {
 
 while [ $# -gt 0 ]; do
   case "$1" in
+    install|update)
+      ACTION="$1"
+      shift
+      ;;
     --project) MODE="project"; shift ;;
     --force) FORCE="true"; shift ;;
     --repo) REPO_URL="${2:?missing repo url}"; shift 2 ;;
