@@ -16,3 +16,7 @@ Pre-release snapshot of `pi-skills`.
 - `update` mode that preserves existing publish-message config
 - Planning, execution, and loop-engineering skill families
 - Local verification helper and documentation updates
+
+### Release note
+
+This tag is intentionally pre-release. It marks a usable snapshot, but behavior, prompts, and installer details may still change before `v0.1.0`.
