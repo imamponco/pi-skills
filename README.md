@@ -119,6 +119,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/imamponco/pi-skills/main
 
 Then restart pi.
 
+If you later want to upgrade/reinstall without overwriting your existing publish-message config, use `update`:
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/imamponco/pi-skills/main/install.sh)" -- update all
+```
+
 ### 3) Install a single skill or everything
 
 Install only `code-review`:
@@ -180,6 +186,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/imamponco/pi-skills/main
 ```
 
 If same skill name already exists, installer prompts: update existing skill or create new skill with custom name. In non-interactive mode, `--force` updates existing; without `--force`, installer creates next available name like `code-review-1`. Restart pi after install.
+
+Use `update` when you want to reinstall skills but keep your existing `~/.publish-message.env` delivery config.
 
 ## Workflow
 
