@@ -2,6 +2,8 @@
 
 A collection of skills for [pi-coding-agent](https://pi.dev).
 
+> Status: pre-release (`v0.1.0-pre.1`). Behavior and skill prompts may still change.
+
 ## Overview
 
 `pi-skills` is organized into reusable skill families:
