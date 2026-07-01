@@ -2,8 +2,8 @@
 
 A collection of skills for [pi-coding-agent](https://pi.dev).
 
-> Status: pre-release (`v0.1.0-pre.1`). Behavior and skill prompts may still change.
-> This tag is a snapshot, not a stable release.
+> Status: pre-release. Behavior and skill prompts may still change.
+> Releases are tagged from `main` after merge.
 
 ## Overview
 
