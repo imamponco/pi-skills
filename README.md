@@ -163,6 +163,8 @@ In pi, check the skills you expect to use:
 - Plan work: `/skill:prd` → `/skill:task-detail`
 - Execute work: `/skill:task-breakdown` → `/skill:task-execute` → `/skill:task-verify`
 - Run a loop system: `/skill:morning-triage` → `/skill:loop-state` → `/skill:loop-judge` → `/skill:loop-harness` → `/skill:loop-scheduler` → `/skill:loop-engineering`
+- Run the best local quality check before shipping: `python3 scripts/run-best-local-check.py .`
+- If there is no local command, the helper will tell you which common files were checked
 
 ## Non-interactive setup
 

@@ -183,3 +183,25 @@ Best for:
 - Use the judge as a separate evaluator whenever possible.
 - Keep a human checkpoint in the loop.
 - Persist state outside the conversation.
+
+## Local verification helper
+
+Use `scripts/run-best-local-check.py` when you want the repo to discover and run the strongest available local quality check automatically.
+
+It looks for:
+- `package.json` scripts
+- `Makefile` / `makefile` targets
+- `justfile` / `Justfile` recipes
+
+Typical usage:
+
+```bash
+python3 scripts/run-best-local-check.py .
+```
+
+Helpful modes:
+
+```bash
+python3 scripts/run-best-local-check.py . --list
+python3 scripts/run-best-local-check.py . --json
+```
